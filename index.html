@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobro de Producto</title>
+    <link rel="stylesheet" href="css/salario.css" />
+    <link rel="stylesheet" href="css/formoid-solid-purple.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Khula:wght@300&display=swap" rel="stylesheet">
+    <script src="js/disabledtextfields.js"></script>
+    <script src="js/inputFilter.js"></script>
+    <script src="js/modernizr.custom.lis.js"></script>
+    <script src="js/prefixfree.min.js"></script>
+    <script src="js/jquery.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('input[type=checkbox]').live('click', function(){
+		var parent = $(this).parent().attr('id');
+		$('#'+parent+' input[type=checkbox]').removeAttr('checked');
+		$(this).attr('checked', 'checked');
+    });
+});
+
+function validar(obj){
+	var d = document.facturacio;
+	if(obj.checked==true){
+		d.enviar.disabled = false;
+	}else{
+		d.enviar.disabled= true;
+	}
+}
+
+</script>
+
+</head>
+<body>
+    <header id="inset">
+        <h1>Facturar Compra</h1>
+    </header>
+    <section>
+    <article>
+    <div id="empleado">
+    <form action="Facturacion.php" method="POST" name="facturacio" id="salario" 
+    class="formoid-solid-purple">
+    <div class="title">
+    <h2>Introduzca el producto</h2>
+    </div>
+    <div class="element-name">
+        <br/>
+        <label class="title"></label>
+        <div class="nameFirst">
+        <input type="text" name="producto" id="txtempleado" maxlength="50" placeholder="Producto" 
+        allowed="ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚáéíóúÜü"
+        messageid="alfabeticchars" class="large" required/>
+        
+    </div>
+    <span id="alfabeticchars">Solo acepta caracteres alfabéticos</span>
+    </div>
+
+    <div class="element-number">
+        <label class="title"></label>
+        <div>
+        <input type="text" name="cantidad" id="sueldobase" maxlength="12" placeholder="Cantidad" allowed="0123456789"  messageid="numbersonly" class="large" required/>
+        
+    </div>
+    <span id="numbersonly">Solo acepta números</span>
+    </div>
+
+    <div class="element-number">
+        <label class="title"></label>
+        <div>
+        <input type="text" name="precio" id="sueldobase" maxlength="12" placeholder="Precio" allowed="0123456789."  messageid="numbersonly" class="large" required/>
+        
+    </div>
+    <span id="numbersonly">Solo acepta números y punto decimal</span>
+    </div>
+
+    <div class="element-checkbox">
+        <label class="title">Metodo de pago:</label>
+        <div id="product1">
+            <input type="checkbox" name="efectivo" value="1" onclick="javascript:validar(this);"/>
+            <span>Efectivo</span><br/>
+            <input type="checkbox" name="cheque" value="2" onclick="javascript:validar(this);"/>
+            <span>Cheque</span><br/>
+            <input type="checkbox" name="tarjeta"  value="3" onclick="javascript:validar(this);"/>
+            <span>Trajeta de crédito</span>
+    </div>
+    <br/>
+    <div class="submit">
+            <input type="submit" name="enviar" id="enviar" value="Enviar" disabled />
+            <input type="reset" name="reset" id="reset" value="Restablecer" />
+    </div>
+    </form>
+    <br>
+    </div>
+    </article>
+    </section>
+</body>
+</html>
